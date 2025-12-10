@@ -6,7 +6,9 @@ pdfjs.GlobalWorkerOptions.workerSrc = pdfWorker;
 
 let CounterFieldId = 1;
 export default function PdfEditor({ selectedFieldType }) {
-  const API_BASE_URL =import.meta.env.VITE_API_BASE_URL || "http://localhost:5001";
+  const API_BASE_URL = window.location.hostname === "localhost"
+    ? "http://localhost:5001"
+    : "https://your-render-backend-url.onrender.com";
   const [numPages, setNumPages] = useState(null);
   const [pageSize, setPageSize] = useState({ width: 0, height: 0 });
   const [fields, setFields] = useState([]);
