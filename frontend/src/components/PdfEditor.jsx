@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import pdfWorker from "pdfjs-dist/build/pdf.worker.min.mjs?url";
-
+const API_BASE_URL="https://pdfsign-backend.onrender.com";
 pdfjs.GlobalWorkerOptions.workerSrc = pdfWorker;
 
 let CounterFieldId = 1;
 export default function PdfEditor({ selectedFieldType }) {
+  const API_BASE_URL =import.meta.env.VITE_API_BASE_URL || "http://localhost:5001";
   const [numPages, setNumPages] = useState(null);
   const [pageSize, setPageSize] = useState({ width: 0, height: 0 });
   const [fields, setFields] = useState([]);
@@ -16,8 +17,7 @@ export default function PdfEditor({ selectedFieldType }) {
   const dragStateRef = useRef(null);
   const resizeStateRef = useRef(null);
 
-  const pdfUrl = "http://localhost:5001/pdf/sample";
-
+  const pdfUrl = `${API_BASE_URL}/pdf/sample`;
   const onLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
   };
@@ -249,11 +249,12 @@ export default function PdfEditor({ selectedFieldType }) {
         box,
       };
 
-      const response = await fetch("http://localhost:5001/sign-pdf", {
+      const response = await fetch(`${API_BASE_URL}/sign-pdf`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
+
 
       if (!response.ok) {
         const errData = await response.json().catch(() => ({}));
