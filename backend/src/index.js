@@ -123,7 +123,7 @@ const imgHeight = signatureImage.height;
       originalHash,
       signedHash,
     });
-    const baseUrl = process.env.BASE_URL || `http://localhost:${process.env.PORT || 5001}`;
+    const baseUrl = `${req.protocol}://${req.get("host")}`;
     const signedUrl = `${baseUrl}/pdf/signed/${signedFileName}`;
 
     res.json({
