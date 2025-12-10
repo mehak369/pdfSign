@@ -6,9 +6,6 @@ pdfjs.GlobalWorkerOptions.workerSrc = pdfWorker;
 
 let CounterFieldId = 1;
 export default function PdfEditor({ selectedFieldType }) {
-  const API_BASE_URL = window.location.hostname === "localhost"
-    ? "http://localhost:5001"
-    : "https://your-render-backend-url.onrender.com";
   const [numPages, setNumPages] = useState(null);
   const [pageSize, setPageSize] = useState({ width: 0, height: 0 });
   const [fields, setFields] = useState([]);
@@ -404,7 +401,7 @@ export default function PdfEditor({ selectedFieldType }) {
       </p>
       <p className="text-xl text-slate-400 border-2">
         If you are using a mobile, tap on the box and then tap on the PDF to place it.
-        Pease do not drag.
+        Please do not drag in case of mobile device.
       </p>
     </div>
   );
